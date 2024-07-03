@@ -1,0 +1,58 @@
+orm query for creating object employee
+class Employee(models.Model):
+    title=models.Charfield
+>>
+qs=Employee.objects.get(id=1)
+
+>>filtering department querysets
+qs=Employee.objects.filter(department="hr")
+
+>>salary greaterthan 45000
+qs=Employee.objects.filter(salary__gt=45000)
+
+>>__iexact= (casesensitive) 
+filter employess whose place=ThRissur
+qs=Employee.objects.filter(location__iexact="ThRissur")
+
+>>__icontains 
+filter employees whoose name letter conatins ab
+qs=Employee.objects.filter(name__icontains="ab")
+
+__in
+>>filter all employee in hr and finance in department
+qs=Employee.objects.filter(department__in=["hr","finance"])
+
+update orm queryupdate
+updatejob
+>>Employee.objects.filter(id=3).update(department="ceo",salary=200000)
+
+delete orm query
+>>Employee.objects.filter(id=4).delete()
+
+aggregate functions(max,min,avg,count,sum)
+
+fetching all department
+Employee.objects.values(column name)
+Employee.objects.values("department")
+Employee.objects.values_list("department")
+<QuerySet [('hr',), ('ceo',), ('hr',), ('sales',), ('finance',)]>
+
+> Employee.objects.values_list("department",flat=True)
+<QuerySet ['developer', 'developer', 'ceo', 'finance', 'sales']>
+
+Employee.objects.values_list("department",flat=True).distinct()
+<QuerySet ['developer', 'ceo', 'finance', 'sales']>
+
+sorting query
+sorting employee with salary
+
+asending
+qs=Employee.objects.all().order_by("salary")
+
+decending
+qs=Employee.objects.all().order_by("-salary")
+
+aggregate orm query
+(max,count,min,avg,sum)
+from django.db.models import Max
+max_salary=Employee.objects.aggregate(Max("salary"))

@@ -1,0 +1,39 @@
+{%extends 'base.html'%}
+
+{%block main_block%}
+
+<div class="container mt-5 border shadow">
+
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Salary</th>
+            <th>Location</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Action</th>
+        </tr>
+        {%for e in data%}
+        <tr>
+            <td>{{e.name}}</td>
+            <td>{{e.department}}</td>
+            <td>{{e.salary}}</td>
+            <td>{{e.location}}</td>
+            <td>{{e.email}}</td>
+            <td>{{e.address}}</td>
+            <td>
+                <a href="{%url 'emp-detail' e.id%}" class="btn btn-outline-danger">View</a>
+
+                <a href="{%url 'emp-remove' e.id%}" class="btn btn-outline-primary">Remove</a>
+
+                <a href="{%url 'emp-edit' e.id%}" class="btn btn-outline-primary">Edit</a>
+
+            </td>
+        </tr>
+        {%endfor%}
+    </table>
+
+</div>
+
+{%endblock%}
